@@ -13,7 +13,11 @@ class WhoCanItBeNow(commands.Cog):
         self.streaming = False
 
     def cog_unload(self):
-        asyncio.get_event_loop().run_until_complete(self.stop_if_running())
+        future = asyncio.run_coroutine_threadsafe(self.stop_if_running(), asyncio.get_event_loop())
+        try:
+            future.result()
+        except:
+            pass
 
     @commands.Cog.listener("on_error")
     @commands.Cog.listener("on_disconnect")
