@@ -1,5 +1,5 @@
-from .bitcoin import Bitcoin as Cog
+from .bitcoin import Bitcoin
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Bitcoin(bot))

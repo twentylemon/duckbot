@@ -1,5 +1,5 @@
-from .recipe import Recipe as Cog
+from .recipe import Recipe
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Recipe(bot))

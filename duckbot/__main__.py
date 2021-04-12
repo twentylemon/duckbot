@@ -1,6 +1,7 @@
 import os
 import sys
 from discord.ext import commands
+import duckbot
 from duckbot.cogs import Duck, Tito, Typos, Recipe, Bitcoin, Insights, Kubernetes, AnnounceDay, ThankingRobot, WhoCanItBeNow
 from duckbot.server import Channels, Emojis
 from duckbot.db import Database
@@ -8,11 +9,11 @@ from duckbot.health import HealthCheck
 from duckbot.util import ConnectionTest
 
 
-def duckbot(bot):
+def run_duckbot(bot: commands.Bot):
     if "connection-test" in sys.argv:
-        bot.add_cog(ConnectionTest(bot))
+        bot.load_extension(duckbot.util.connection_test)
 
-    bot.add_cog(HealthCheck(bot))
+    bot.load_extension(duckbot.health)
 
     bot.add_cog(Database(bot))
 
@@ -37,4 +38,4 @@ def duckbot(bot):
 
 if __name__ == "__main__":
     bot = commands.Bot(command_prefix="!", help_command=None)
-    duckbot(bot)
+    run_duckbot(bot)

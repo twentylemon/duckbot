@@ -1,5 +1,5 @@
-from .typos import Typos as Cog
+from .typos import Typos
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Typos(bot))

@@ -1,5 +1,5 @@
-from .insights import Insights as Cog
+from .insights import Insights
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Insights(bot))

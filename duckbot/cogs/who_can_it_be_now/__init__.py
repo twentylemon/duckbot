@@ -1,5 +1,5 @@
-from .who_can_it_be_now import WhoCanItBeNow as Cog
+from .who_can_it_be_now import WhoCanItBeNow
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(WhoCanItBeNow(bot))

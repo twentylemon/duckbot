@@ -1,5 +1,5 @@
-from .duck import Duck as Cog
+from .duck import Duck
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Duck(bot))

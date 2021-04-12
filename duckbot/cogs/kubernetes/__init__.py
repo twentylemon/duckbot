@@ -1,5 +1,5 @@
-from .kubernetes import Kubernetes as Cog
+from .kubernetes import Kubernetes
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Kubernetes(bot))

@@ -1,5 +1,5 @@
-from .thanking_robot import ThankingRobot as Cog
+from .thanking_robot import ThankingRobot
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(ThankingRobot(bot))

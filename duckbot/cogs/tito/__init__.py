@@ -1,5 +1,5 @@
-from .tito import Tito as Cog
+from .tito import Tito
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(Tito(bot))
