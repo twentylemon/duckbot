@@ -5,3 +5,5 @@ pytz
 holidays
 psycopg2
 sqlalchemy
+selenium
+webdriver-manager
