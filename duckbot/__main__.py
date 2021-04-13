@@ -21,6 +21,7 @@ def run_duckbot(bot: commands.Bot):
 
     bot.load_extension(duckbot.cogs.duck)
     bot.load_extension(duckbot.cogs.tito)
+    bot.load_extension(duckbot.cogs.audio)
     bot.load_extension(duckbot.cogs.typos)
     bot.load_extension(duckbot.cogs.robot)
     bot.load_extension(duckbot.cogs.recipe)
@@ -28,7 +29,6 @@ def run_duckbot(bot: commands.Bot):
     bot.load_extension(duckbot.cogs.insights)
     bot.load_extension(duckbot.cogs.kubernetes)
     bot.load_extension(duckbot.cogs.announce_day)
-    bot.load_extension(duckbot.cogs.who_can_it_be_now)
     bot.load_extension(duckbot.cogs.message_modified)
 
     bot.run(os.getenv("DISCORD_TOKEN"))

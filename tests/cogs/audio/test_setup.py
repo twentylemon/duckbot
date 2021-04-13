@@ -2,7 +2,7 @@ import pytest
 import mock
 from tests.cog_test_ext import assert_cog_added
 from discord.ext.commands import Bot
-from duckbot.cogs.who_can_it_be_now import setup as extension_setup, WhoCanItBeNow
+from duckbot.cogs.audio import setup as extension_setup, WhoCanItBeNow
 
 
 @pytest.mark.asyncio

@@ -2,7 +2,7 @@ import pytest
 import mock
 import asyncio
 from tests.async_mock_ext import async_value
-from duckbot.cogs.who_can_it_be_now import WhoCanItBeNow
+from duckbot.cogs.audio import WhoCanItBeNow
 
 
 def play(*args, **kwargs):

@@ -2,7 +2,7 @@ from discord.ext import commands
 import subprocess
 
 
-class MessageModified(commands.Cog):
+class MessageEditDiff(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
