@@ -1,6 +1,6 @@
 import pytest
 import mock
-from duckbot.cogs import Kubernetes
+from duckbot.cogs.kubernetes import Kubernetes
 
 
 @pytest.mark.asyncio

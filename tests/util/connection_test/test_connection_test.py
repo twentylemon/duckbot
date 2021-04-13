@@ -1,6 +1,6 @@
 import pytest
 import mock
-from duckbot.util import ConnectionTest
+from duckbot.util.connection_test import ConnectionTest
 
 
 @pytest.mark.asyncio

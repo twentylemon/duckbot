@@ -1,6 +1,6 @@
 import pytest
 import mock
-from duckbot.cogs import Bitcoin
+from duckbot.cogs.bitcoin import Bitcoin
 
 
 @pytest.mark.asyncio

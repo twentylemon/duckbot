@@ -1,28 +1,21 @@
 import sys
 import mock
 from unittest.mock import call
-from duckbot.__main__ import duckbot
-from duckbot.util import ConnectionTest
+import duckbot
+from duckbot.__main__ import run_duckbot
 
 
 @mock.patch("discord.ext.commands.Bot")
 @mock.patch("discord.ext.tasks.Loop")
 def test_duckbot_connection_test(bot, loop):
     with mock.patch.object(sys, "argv", ["connection-test"]):
-        duckbot(bot)
-        assert_cog_added(bot, ConnectionTest)
+        run_duckbot(bot)
+        bot.load_extension.assert_any_call(duckbot.util.connection_test)
         bot.run.assert_called()
 
 
 @mock.patch("discord.ext.commands.Bot")
 @mock.patch("discord.ext.tasks.Loop")
 def test_duckbot_normal_run(bot, loop):
-    duckbot(bot)
+    run_duckbot(bot)
     bot.run.assert_called()
-
-
-def assert_cog_added(bot, typ):
-    for invocation in bot.add_cog.call_args_list:
-        if isinstance(invocation[0], typ):
-            return True
-    return False

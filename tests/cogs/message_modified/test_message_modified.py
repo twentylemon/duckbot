@@ -1,6 +1,6 @@
 import pytest
 import mock
-from duckbot.cogs import MessageModified
+from duckbot.cogs.message_modified import MessageModified
 
 
 @pytest.mark.asyncio

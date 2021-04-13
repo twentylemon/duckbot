@@ -2,11 +2,8 @@ import os
 import sys
 from discord.ext import commands
 import duckbot
-from duckbot.cogs import Duck, Tito, Typos, Recipe, Bitcoin, Insights, Kubernetes, AnnounceDay, ThankingRobot, WhoCanItBeNow, MessageModified
-from duckbot.server import Channels, Emojis
-from duckbot.db import Database
-from duckbot.health import HealthCheck
-from duckbot.util import ConnectionTest
+import duckbot.db
+import duckbot.health
 
 
 def run_duckbot(bot: commands.Bot):
@@ -15,24 +12,24 @@ def run_duckbot(bot: commands.Bot):
 
     bot.load_extension(duckbot.health)
 
-    bot.add_cog(Database(bot))
+    bot.load_extension(duckbot.db)
 
     # server cogs must be loaded first; any references to
     # them should happen in or after the `on_ready` event
-    bot.add_cog(Channels(bot))
-    bot.add_cog(Emojis(bot))
+    bot.load_extension(duckbot.server.channels)
+    bot.load_extension(duckbot.server.emojis)
 
-    bot.add_cog(Duck(bot))
-    bot.add_cog(Tito(bot))
-    bot.add_cog(Typos(bot))
-    bot.add_cog(Recipe(bot))
-    bot.add_cog(Bitcoin(bot))
-    bot.add_cog(Insights(bot))
-    bot.add_cog(Kubernetes(bot))
-    bot.add_cog(AnnounceDay(bot))
-    bot.add_cog(ThankingRobot(bot))
-    bot.add_cog(WhoCanItBeNow(bot))
-    bot.add_cog(MessageModified(bot))
+    bot.load_extension(duckbot.cogs.duck)
+    bot.load_extension(duckbot.cogs.tito)
+    bot.load_extension(duckbot.cogs.typos)
+    bot.load_extension(duckbot.cogs.robot)
+    bot.load_extension(duckbot.cogs.recipe)
+    bot.load_extension(duckbot.cogs.bitcoin)
+    bot.load_extension(duckbot.cogs.insights)
+    bot.load_extension(duckbot.cogs.kubernetes)
+    bot.load_extension(duckbot.cogs.announce_day)
+    bot.load_extension(duckbot.cogs.who_can_it_be_now)
+    bot.load_extension(duckbot.cogs.message_modified)
 
     bot.run(os.getenv("DISCORD_TOKEN"))
 

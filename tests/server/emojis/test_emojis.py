@@ -1,6 +1,6 @@
 import pytest
 import mock
-from duckbot.server import Emojis
+from duckbot.server.emojis import Emojis
 
 
 @pytest.mark.asyncio

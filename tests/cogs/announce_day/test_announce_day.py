@@ -1,13 +1,13 @@
 import pytest
 import mock
 import datetime
-from duckbot.cogs import AnnounceDay
+from duckbot.cogs.announce_day import AnnounceDay
 from tests.duckmock.datetime import patch_now
 
 
 @pytest.mark.asyncio
 @mock.patch("discord.ext.commands.Bot")
-@mock.patch("duckbot.server.Channels")
+@mock.patch("duckbot.server.channels.Channels")
 @mock.patch("discord.TextChannel")
 async def test_on_hour_7am_eastern(bot, channels, channel):
     with patch_now(datetime.datetime(2002, 1, 1, hour=7)):
@@ -21,7 +21,7 @@ async def test_on_hour_7am_eastern(bot, channels, channel):
 
 @pytest.mark.asyncio
 @mock.patch("discord.ext.commands.Bot")
-@mock.patch("duckbot.server.Channels")
+@mock.patch("duckbot.server.channels.Channels")
 @mock.patch("discord.TextChannel")
 async def test_on_hour_not_7am(bot, channels, channel):
     with patch_now(datetime.datetime(2002, 1, 1, hour=8)):

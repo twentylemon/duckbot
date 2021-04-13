@@ -2,7 +2,7 @@ import pytest
 import mock
 from tests.duckmock.urllib import patch_urlopen
 from tests.duckmock.discord import MockAsyncIterator
-from duckbot.cogs import Typos
+from duckbot.cogs.typos import Typos
 
 
 @pytest.mark.asyncio

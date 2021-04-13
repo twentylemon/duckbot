@@ -2,7 +2,7 @@ import pytest
 import mock
 import asyncio
 from tests.async_mock_ext import async_value
-from duckbot.cogs import WhoCanItBeNow
+from duckbot.cogs.who_can_it_be_now import WhoCanItBeNow
 
 
 def play(*args, **kwargs):
@@ -12,7 +12,7 @@ def play(*args, **kwargs):
 @pytest.mark.asyncio
 @mock.patch("discord.ext.commands.Bot")
 @mock.patch("discord.ext.commands.Context")
-@mock.patch("duckbot.server.Channels")
+@mock.patch("duckbot.server.channels.Channels")
 @mock.patch("discord.VoiceChannel")
 @mock.patch("discord.VoiceClient")
 async def test_task_loop(bot, context, channels, voice, client):
