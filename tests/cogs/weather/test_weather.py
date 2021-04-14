@@ -3,8 +3,8 @@ import mock
 from pyowm.weatherapi25.location import Location
 from pyowm.weatherapi25.one_call import OneCall
 from pyowm.weatherapi25.weather import Weather as pyowmWeather
-from duckbot.cogs import Weather
-from duckbot.cogs.weather import SavedLocation
+from duckbot.cogs.weather import Weather
+from duckbot.cogs.weather.weather import SavedLocation
 
 
 def make_weather(bot, owm):
