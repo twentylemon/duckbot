@@ -1,6 +1,5 @@
 import os
 import sys
-from types import ModuleType
 from discord.ext import commands
 import duckbot.db
 import duckbot.health
