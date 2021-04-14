@@ -25,6 +25,7 @@ def run_duckbot(bot: commands.Bot):
     bot.load_extension(duckbot.cogs.typos)
     bot.load_extension(duckbot.cogs.robot)
     bot.load_extension(duckbot.cogs.recipe)
+    bot.load_extension(duckbot.cogs.weather)
     bot.load_extension(duckbot.cogs.bitcoin)
     bot.load_extension(duckbot.cogs.insights)
     bot.load_extension(duckbot.cogs.kubernetes)
