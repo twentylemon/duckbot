@@ -6,7 +6,6 @@ from discord.ext import commands
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, BigInteger, String, Float
 
-
 degrees = "\N{DEGREE SIGN}C"
 
 Base = declarative_base()
