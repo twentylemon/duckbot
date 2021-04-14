@@ -1,5 +1,5 @@
-from .message_edit_diff import MessageEditDiff
+from .message_modified import MessageModified
 
 
 def setup(bot):
-    bot.add_cog(MessageEditDiff(bot))
+    bot.add_cog(MessageModified(bot))
