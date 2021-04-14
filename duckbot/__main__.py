@@ -2,7 +2,6 @@ import os
 import sys
 from types import ModuleType
 from discord.ext import commands
-import duckbot
 import duckbot.db
 import duckbot.health
 import duckbot.server.channels
@@ -22,35 +21,31 @@ import duckbot.cogs.message_modified
 import duckbot.util.connection_test
 
 
-def load_extension(bot: commands.Bot, mod: ModuleType):
-    bot.load_extension(mod.__name__)
-
-
 def run_duckbot(bot: commands.Bot):
     if "connection-test" in sys.argv:
-        load_extension(bot, duckbot.util.connection_test)
+        bot.load_extension(duckbot.util.connection_test.__name__)
 
-    load_extension(bot, duckbot.health)
+    bot.load_extension(duckbot.health.__name__)
 
-    load_extension(bot, duckbot.db)
+    bot.load_extension(duckbot.db.__name__)
 
     # server cogs must be loaded first; any references to
     # them should happen in or after the `on_ready` event
-    load_extension(bot, duckbot.server.channels)
-    load_extension(bot, duckbot.server.emojis)
+    bot.load_extension(duckbot.server.channels.__name__)
+    bot.load_extension(duckbot.server.emojis.__name__)
 
-    load_extension(bot, duckbot.cogs.duck)
-    load_extension(bot, duckbot.cogs.tito)
-    load_extension(bot, duckbot.cogs.audio)
-    load_extension(bot, duckbot.cogs.typos)
-    load_extension(bot, duckbot.cogs.robot)
-    load_extension(bot, duckbot.cogs.recipe)
-    load_extension(bot, duckbot.cogs.weather)
-    load_extension(bot, duckbot.cogs.bitcoin)
-    load_extension(bot, duckbot.cogs.insights)
-    load_extension(bot, duckbot.cogs.kubernetes)
-    load_extension(bot, duckbot.cogs.announce_day)
-    load_extension(bot, duckbot.cogs.message_modified)
+    bot.load_extension(duckbot.cogs.duck.__name__)
+    bot.load_extension(duckbot.cogs.tito.__name__)
+    bot.load_extension(duckbot.cogs.audio.__name__)
+    bot.load_extension(duckbot.cogs.typos.__name__)
+    bot.load_extension(duckbot.cogs.robot.__name__)
+    bot.load_extension(duckbot.cogs.recipe.__name__)
+    bot.load_extension(duckbot.cogs.weather.__name__)
+    bot.load_extension(duckbot.cogs.bitcoin.__name__)
+    bot.load_extension(duckbot.cogs.insights.__name__)
+    bot.load_extension(duckbot.cogs.kubernetes.__name__)
+    bot.load_extension(duckbot.cogs.announce_day.__name__)
+    bot.load_extension(duckbot.cogs.message_modified.__name__)
 
     bot.run(os.getenv("DISCORD_TOKEN"))
 
