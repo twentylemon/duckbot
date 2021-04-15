@@ -3,6 +3,7 @@ sudo apt-get update && sudo apt-get install -y \
     ffmpeg \
     postgresql libpq-dev \
     firefox \
+    fortune-mod cowsay \
     && \
 
 # upgrade venv pip
