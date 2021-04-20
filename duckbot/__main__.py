@@ -1,16 +1,16 @@
 import os
-import sys
+from discord import Intents
 from discord.ext import commands
-from duckbot.cogs import Duck, Tito, Typos, Recipe, Bitcoin, Insights, Kubernetes, AnnounceDay, ThankingRobot, Weather, WhoCanItBeNow, Fortune, MessageModified
+from duckbot.cogs import Duck, Tito, Typos, Recipe, Bitcoin, Insights, Kubernetes, AnnounceDay, ThankingRobot, Weather, WhoCanItBeNow, FormulaOne, Fortune, MessageModified
 from duckbot.server import Channels, Emojis
 from duckbot.db import Database
 from duckbot.health import HealthCheck
-from duckbot.util import ConnectionTest
+import duckbot.util.connection_test
 
 
-def duckbot(bot):
-    if "connection-test" in sys.argv:
-        bot.add_cog(ConnectionTest(bot))
+def run_duckbot(bot: commands.Bot):
+    if "connection-test" in os.getenv("DUCKBOT_ARGS", ""):
+        bot.load_extension(duckbot.util.connection_test.__name__)
 
     bot.add_cog(HealthCheck(bot))
 
@@ -30,6 +30,7 @@ def duckbot(bot):
     bot.add_cog(Bitcoin(bot))
     bot.add_cog(Insights(bot))
     bot.add_cog(Kubernetes(bot))
+    bot.add_cog(FormulaOne(bot))
     bot.add_cog(AnnounceDay(bot))
     bot.add_cog(ThankingRobot(bot))
     bot.add_cog(WhoCanItBeNow(bot))
@@ -38,6 +39,19 @@ def duckbot(bot):
     bot.run(os.getenv("DISCORD_TOKEN"))
 
 
+def intents() -> Intents:
+    intent = Intents.default()
+    intent.members = False
+    intent.presences = False
+    intent.bans = False
+    intent.integrations = False
+    intent.webhooks = False
+    intent.invites = False
+    intent.webhooks = False
+    intent.typing = False
+    return intent
+
+
 if __name__ == "__main__":
-    bot = commands.Bot(command_prefix="!", help_command=None)
-    duckbot(bot)
+    bot = commands.Bot(command_prefix="!", help_command=None, intents=intents())
+    run_duckbot(bot)
