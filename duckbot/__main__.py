@@ -1,10 +1,21 @@
 import os
 from discord import Intents
 from discord.ext import commands
-from duckbot.cogs import Duck, Tito, Typos, Recipe, Bitcoin, Insights, Kubernetes, AnnounceDay, ThankingRobot, Weather, WhoCanItBeNow, FormulaOne, Fortune, MessageModified
+import duckbot.cogs.tito
+import duckbot.cogs.robot
+import duckbot.cogs.audio
+import duckbot.cogs.recipe
+import duckbot.cogs.fortune
+import duckbot.cogs.weather
+import duckbot.cogs.messages
+import duckbot.cogs.insights
+import duckbot.cogs.formula_one
+import duckbot.cogs.corrections
+import duckbot.cogs.announce_day
+from duckbot.cogs import Duck
 from duckbot.server import Channels, Emojis
 from duckbot.db import Database
-from duckbot.health import HealthCheck
+import duckbot.health
 import duckbot.util.connection_test
 
 
@@ -12,7 +23,7 @@ def run_duckbot(bot: commands.Bot):
     if "connection-test" in os.getenv("DUCKBOT_ARGS", ""):
         bot.load_extension(duckbot.util.connection_test.__name__)
 
-    bot.add_cog(HealthCheck(bot))
+    bot.load_extension(duckbot.health.__name__)
 
     bot.add_cog(Database(bot))
 
@@ -22,19 +33,17 @@ def run_duckbot(bot: commands.Bot):
     bot.add_cog(Emojis(bot))
 
     bot.add_cog(Duck(bot))
-    bot.add_cog(Tito(bot))
-    bot.add_cog(Typos(bot))
-    bot.add_cog(Recipe(bot))
-    bot.add_cog(Fortune(bot))
-    bot.add_cog(Weather(bot))
-    bot.add_cog(Bitcoin(bot))
-    bot.add_cog(Insights(bot))
-    bot.add_cog(Kubernetes(bot))
-    bot.add_cog(FormulaOne(bot))
-    bot.add_cog(AnnounceDay(bot))
-    bot.add_cog(ThankingRobot(bot))
-    bot.add_cog(WhoCanItBeNow(bot))
-    bot.add_cog(MessageModified(bot))
+    bot.load_extension(duckbot.cogs.tito.__name__)
+    bot.load_extension(duckbot.cogs.recipe.__name__)
+    bot.load_extension(duckbot.cogs.fortune.__name__)
+    bot.load_extension(duckbot.cogs.weather.__name__)
+    bot.load_extension(duckbot.cogs.insights.__name__)
+    bot.load_extension(duckbot.cogs.corrections.__name__)
+    bot.load_extension(duckbot.cogs.formula_one.__name__)
+    bot.load_extension(duckbot.cogs.announce_day.__name__)
+    bot.load_extension(duckbot.cogs.robot.__name__)
+    bot.load_extension(duckbot.cogs.audio.__name__)
+    bot.load_extension(duckbot.cogs.messages.__name__)
 
     bot.run(os.getenv("DISCORD_TOKEN"))
 
