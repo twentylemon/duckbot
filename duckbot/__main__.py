@@ -4,16 +4,16 @@ from discord.ext import commands
 import duckbot.cogs.tito
 import duckbot.cogs.robot
 import duckbot.cogs.audio
-import duckbot.cogs.recipe
 import duckbot.cogs.fortune
+import duckbot.cogs.recipe
 import duckbot.cogs.weather
 import duckbot.cogs.messages
 import duckbot.cogs.insights
+import duckbot.cogs.corrections
 import duckbot.cogs.formula_one
 import duckbot.cogs.corrections
 import duckbot.cogs.announce_day
 from duckbot.cogs import Duck
-from duckbot.server import Channels, Emojis
 from duckbot.db import Database
 import duckbot.health
 import duckbot.util.connection_test
@@ -26,11 +26,6 @@ def run_duckbot(bot: commands.Bot):
     bot.load_extension(duckbot.health.__name__)
 
     bot.add_cog(Database(bot))
-
-    # server cogs must be loaded first; any references to
-    # them should happen in or after the `on_ready` event
-    bot.add_cog(Channels(bot))
-    bot.add_cog(Emojis(bot))
 
     bot.add_cog(Duck(bot))
     bot.load_extension(duckbot.cogs.tito.__name__)
