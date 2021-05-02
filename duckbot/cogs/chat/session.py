@@ -29,7 +29,9 @@ class Session:
         print("__get_form")
         try:
             print("find_element_by_id")
-            self.browser.find_element_by_id('noteb').find_elements_by_tag_name("form")[0].submit()
+            print(self.browser.find_element_by_id('noteb'))
+            print(self.browser.find_element_by_id('noteb').find_element_by_tag_name("form"))
+            self.browser.find_element_by_id('noteb').find_elements_by_tag_name("form").submit()
         except ElementNotInteractableException:
             print("ElementNotInteractableException")
             pass
