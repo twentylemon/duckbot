@@ -1,6 +1,7 @@
 import os
 from discord import Intents
 from discord.ext import commands
+import duckbot.cogs.chat
 import duckbot.cogs.tito
 import duckbot.cogs.robot
 import duckbot.cogs.audio
@@ -28,6 +29,7 @@ def run_duckbot(bot: commands.Bot):
     bot.add_cog(Database(bot))
 
     bot.add_cog(Duck(bot))
+    bot.load_extension(duckbot.cogs.chat.__name__)
     bot.load_extension(duckbot.cogs.tito.__name__)
     bot.load_extension(duckbot.cogs.recipe.__name__)
     bot.load_extension(duckbot.cogs.fortune.__name__)

@@ -22,6 +22,7 @@ class Cleverbot:
         # initialize selenium options/arguments
         self.opts = Options()
         self.opts.add_argument("--headless")
+        self.opts.set_headless(True)
         self.browser = webdriver.Firefox(options=self.opts, executable_path=GeckoDriverManager().install())
         self.url = 'https://www.cleverbot.com'
         self.hacking = False
@@ -112,3 +113,6 @@ class Cleverbot:
         self.send_input(userInput)
         self.get_response()
         return self.botResponse
+
+cb = Cleverbot()
+print(cb.single_exchange("hello, robot"))
