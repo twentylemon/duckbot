@@ -53,6 +53,7 @@ if __name__ == "__main__":
                 "pytest-mock",
                 "pytest-xdist[psutil]",
                 "flake8",
+                "flake8-eradicate",
                 "pytest-flake8",
                 "black",
                 "pytest-black",
