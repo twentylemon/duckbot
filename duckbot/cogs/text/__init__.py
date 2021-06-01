@@ -1,5 +1,5 @@
 from .ascii_art import AsciiArt
-from .markov_chain import MarkovChain
+from .markov import MarkovChain
 
 
 def setup(bot):
