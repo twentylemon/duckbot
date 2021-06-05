@@ -9,7 +9,7 @@ class Ngram1(Base):
 
     userid = Column(BigInteger, primary_key=True)
     word1 = Column(String, primary_key=True)
-    frequency = Column(BigInteger)
+    frequency = Column(BigInteger, nullable=False)
 
     __table_args__ = (Index("markov_search", userid),)
 
@@ -20,7 +20,7 @@ class Ngram2(Base):
     userid = Column(BigInteger, primary_key=True)
     word1 = Column(String, primary_key=True)
     word2 = Column(String, primary_key=True)
-    frequency = Column(BigInteger)
+    frequency = Column(BigInteger, nullable=False)
 
     __table_args__ = (Index("markov_search", userid, word1),)
 
@@ -32,7 +32,7 @@ class Ngram3(Base):
     word1 = Column(String, primary_key=True)
     word2 = Column(String, primary_key=True)
     word3 = Column(String, primary_key=True)
-    frequency = Column(BigInteger)
+    frequency = Column(BigInteger, nullable=False)
 
     __table_args__ = (Index("markov_search", userid, word1, word2),)
 
@@ -45,6 +45,6 @@ class Ngram4(Base):
     word2 = Column(String, primary_key=True)
     word3 = Column(String, primary_key=True)
     word4 = Column(String, primary_key=True)
-    frequency = Column(BigInteger)
+    frequency = Column(BigInteger, nullable=False)
 
     __table_args__ = (Index("markov_search", userid, word1, word2, word3),)
