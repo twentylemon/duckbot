@@ -1,10 +1,12 @@
-from discord import Member, ChannelType, TextChannel, Message
-from discord.ext import commands
 from typing import List, Optional
+
+from discord import ChannelType, Member, Message, TextChannel
+from discord.ext import commands
+from nltk.tokenize import word_tokenize
+from nltk.util import ngrams
+
 from duckbot import DuckBot
 from duckbot.db import Database
-from nltk.util import ngrams
-from nltk.tokenize import word_tokenize
 
 
 class PullHistory(commands.Cog):

@@ -1,6 +1,7 @@
+import duckbot.cogs.text.markov
+
 from .ascii_art import AsciiArt
 from .mock_text import MockText
-import duckbot.cogs.text.markov
 
 
 def setup(bot):

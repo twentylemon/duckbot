@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, Column, String, Index
+from sqlalchemy import BigInteger, Column, Index, String
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
