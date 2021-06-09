@@ -99,14 +99,12 @@ def bot_orig(b) -> DuckBot:
 
 
 @pytest.fixture
-@clone_on_request(serialize=True)
 @mock.patch("discord.User", autospec=True)
 def user(u) -> discord.User:
     return u
 
 
 @pytest.fixture
-@clone_on_request(serialize=True)
 @mock.patch("discord.Member", autospec=True)
 def member(m) -> discord.Member:
     return m
@@ -125,7 +123,6 @@ def member_mock_cache(mock_cache) -> discord.Member:
 
 
 @pytest.fixture
-@clone_on_request(serialize=True)
 @mock.patch("discord.Message", autospec=True)
 def message(m, channel, user, member) -> discord.Message:
     """Returns a message with nested properties set, for each channel type a message can be sent to."""
@@ -135,7 +132,6 @@ def message(m, channel, user, member) -> discord.Message:
 
 
 @pytest.fixture
-@clone_on_request(serialize=True)
 @mock.patch("discord.Message", autospec=True)
 def text_message(m, text_channel, member) -> discord.Message:
     """Returns a guild TextChannel message with the channel property set."""
@@ -165,14 +161,12 @@ def text_context(c, text_message) -> discord.ext.commands.Context:
 
 
 @pytest.fixture
-@clone_on_request()
 @mock.patch("discord.Emoji", autospec=True)
 def emoji(e) -> discord.Emoji:
     return e
 
 
 @pytest.fixture
-@clone_on_request()
 @mock.patch("discord.Guild", autospec=True)
 def guild(g) -> discord.Guild:
     return g
@@ -229,7 +223,6 @@ def voice_channel(vc) -> discord.VoiceChannel:
 
 
 @pytest.fixture
-@clone_on_request()
 @mock.patch("discord.VoiceClient", autospec=True)
 def voice_client(vc) -> discord.VoiceClient:
     return vc
