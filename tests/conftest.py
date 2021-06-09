@@ -3,9 +3,16 @@ from unittest import mock
 
 import discord
 import discord.ext.commands
+import discord.ext.tasks
 import pytest
 
 from duckbot import DuckBot
+from tests.pytest_ext import (
+    MockCache,
+    cache_mock_fixture,
+    clone_on_request,
+    qualified_name,
+)
 
 
 def pytest_configure(config):
@@ -50,7 +57,32 @@ async def bot_spy() -> DuckBot:
     await b.close()
 
 
+@pytest.fixture(scope="session")
+def mock_cache():
+    yield MockCache()
+    mock.patch.stopall()
+
+
 @pytest.fixture
+def bot_mock_cache(mock_cache) -> DuckBot:
+    name = qualified_name(DuckBot)
+    b = mock_cache[name] if name in mock_cache else mock_cache.patch(name)
+    b.loop = mock.Mock()
+    with mock.patch("discord.ext.tasks.Loop"):  # mock out loop, it uses `asyncio.get_event_loop()` by default
+        return b
+
+
+@pytest.fixture
+@cache_mock_fixture
+@mock.patch("duckbot.DuckBot", autospec=True)
+def bot_cache(b) -> DuckBot:
+    b.loop = mock.Mock()
+    with mock.patch("discord.ext.tasks.Loop"):  # mock out loop, it uses `asyncio.get_event_loop()` by default
+        return b
+
+
+@pytest.fixture
+@clone_on_request()
 @mock.patch("duckbot.DuckBot", autospec=True)
 def bot(b) -> DuckBot:
     b.loop = mock.Mock()
@@ -59,18 +91,41 @@ def bot(b) -> DuckBot:
 
 
 @pytest.fixture
+@mock.patch("duckbot.DuckBot", autospec=True)
+def bot_orig(b) -> DuckBot:
+    b.loop = mock.Mock()
+    with mock.patch("discord.ext.tasks.Loop"):  # mock out loop, it uses `asyncio.get_event_loop()` by default
+        return b
+
+
+@pytest.fixture
+@clone_on_request(serialize=True)
 @mock.patch("discord.User", autospec=True)
 def user(u) -> discord.User:
     return u
 
 
 @pytest.fixture
+@clone_on_request(serialize=True)
 @mock.patch("discord.Member", autospec=True)
 def member(m) -> discord.Member:
     return m
 
 
 @pytest.fixture
+def user_mock_cache(mock_cache) -> discord.User:
+    name = qualified_name(discord.User)
+    return mock_cache[name] if name in mock_cache else mock_cache.patch(name)
+
+
+@pytest.fixture
+def member_mock_cache(mock_cache) -> discord.Member:
+    name = qualified_name(discord.Member)
+    return mock_cache[name] if name in mock_cache else mock_cache.patch(name)
+
+
+@pytest.fixture
+@clone_on_request(serialize=True)
 @mock.patch("discord.Message", autospec=True)
 def message(m, channel, user, member) -> discord.Message:
     """Returns a message with nested properties set, for each channel type a message can be sent to."""
@@ -80,6 +135,7 @@ def message(m, channel, user, member) -> discord.Message:
 
 
 @pytest.fixture
+@clone_on_request(serialize=True)
 @mock.patch("discord.Message", autospec=True)
 def text_message(m, text_channel, member) -> discord.Message:
     """Returns a guild TextChannel message with the channel property set."""
@@ -109,12 +165,14 @@ def text_context(c, text_message) -> discord.ext.commands.Context:
 
 
 @pytest.fixture
+@clone_on_request()
 @mock.patch("discord.Emoji", autospec=True)
 def emoji(e) -> discord.Emoji:
     return e
 
 
 @pytest.fixture
+@clone_on_request()
 @mock.patch("discord.Guild", autospec=True)
 def guild(g) -> discord.Guild:
     return g
@@ -171,6 +229,7 @@ def voice_channel(vc) -> discord.VoiceChannel:
 
 
 @pytest.fixture
+@clone_on_request()
 @mock.patch("discord.VoiceClient", autospec=True)
 def voice_client(vc) -> discord.VoiceClient:
     return vc
