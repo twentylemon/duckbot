@@ -1,5 +1,5 @@
 # collect pip dependencies into a virtualenv, which we'll copy into the prod stage
-FROM python:3.9 as pip-dependencies
+FROM python:3.10.0b2 as pip-dependencies
 ENV VIRTUAL_ENV "/opt/venv"
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH "$VIRTUAL_ENV/bin:$PATH"
@@ -14,7 +14,7 @@ COPY setup.py .
 RUN pip install --extra-index-url https://www.piwheels.org/simple .
 
 
-FROM python:3.9-slim as tests
+FROM python:3.10.0b2-slim as tests
 RUN apt-get update && apt-get -y install \
     ffmpeg \
     libpq-dev \
@@ -29,10 +29,11 @@ COPY pyproject.toml .
 COPY setup.py .
 COPY --from=pip-dependencies "$VIRTUAL_ENV" "$VIRTUAL_ENV"
 RUN pip install --extra-index-url https://www.piwheels.org/simple .[dev]
+COPY setup.cfg .
 COPY resources/ ./resources
 COPY duckbot/ ./duckbot
 COPY tests/ ./tests
-RUN ["pytest", "-n", "0", "-v"]
+RUN ["pytest", "-v"]
 
 
 FROM python:3.8-slim as prod

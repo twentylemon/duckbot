@@ -99,12 +99,14 @@ def bot_orig(b) -> DuckBot:
 
 
 @pytest.fixture
+@clone_on_request()
 @mock.patch("discord.User", autospec=True)
 def user(u) -> discord.User:
     return u
 
 
 @pytest.fixture
+@clone_on_request()
 @mock.patch("discord.Member", autospec=True)
 def member(m) -> discord.Member:
     return m
