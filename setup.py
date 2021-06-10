@@ -56,6 +56,7 @@ if __name__ == "__main__":
             "textblob<1",
             "pyfiglet<1",
             "matplotlib>=3.4,<4",
+            "markovify<1",
         ],
         extras_require={
             "dev": [
