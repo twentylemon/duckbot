@@ -34,7 +34,7 @@ if __name__ == "__main__":
     setup(
         name="duckbot",
         version="1.0",
-        url="https://github.com/Chippers255/duckbot",
+        url="https://github.com/duck-dynasty/duckbot",
         python_requires=">=3.8",
         packages=find_packages(),
         cmdclass={"develop": PostDevelop, "install": PostInstall},
@@ -43,7 +43,7 @@ if __name__ == "__main__":
             "textblob<1",
         ],
         install_requires=[
-            "discord.py[voice]>=1.7,<2",
+            "discord.py[voice] @ git+https://github.com/Rapptz/discord.py",
             "beautifulsoup4",
             "pytz",
             "timezonefinder>=5.2,<6",
@@ -68,6 +68,7 @@ if __name__ == "__main__":
                 "flake8-black",
                 "isort",
                 "flake8-isort",
+                "pep8-naming",
                 "pytest-flake8",
                 "pytest-blockage",
                 "pytest-sugar",
