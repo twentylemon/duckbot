@@ -9,6 +9,8 @@
 
 A Discord bot for personal friend group. If you don't know me personally, consider how freaking weird it'd be to ask for the access token. Feel free to steal the code though.
 
+PULL REQUEST TEST
+
 View the [wiki](https://github.com/duck-dynasty/duckbot/wiki) for a short description on what the Duck does.
 
 
