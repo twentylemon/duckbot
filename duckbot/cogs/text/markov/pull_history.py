@@ -1,10 +1,11 @@
 from typing import List, Optional, Union
 
+import markovify
 from discord import ChannelType, Member, Message, TextChannel, User
 from discord.ext import commands
 from nltk.tokenize import word_tokenize
 from nltk.util import ngrams
-import markovify
+
 from duckbot import DuckBot
 from duckbot.db import Database
 
@@ -21,7 +22,7 @@ class PullHistory(commands.Cog):
         channels = [c for c in self.bot.get_all_channels() if c.type == ChannelType.text]
         for channel in channels:
             messages, still_more = await self.fetch_batch(channel, user)
-            content = '. '.join([x.clean_content for x in messages])
+            content = ". ".join([x.clean_content for x in messages])
             model = markovify.Text(content)
             for i in range(10):
                 print(model.make_sentence())
