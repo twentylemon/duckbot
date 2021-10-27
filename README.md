@@ -11,6 +11,7 @@ A Discord bot for personal friend group. If you don't know me personally, consid
 
 View the [wiki](https://github.com/duck-dynasty/duckbot/wiki) for a short description on what the Duck does.
 
+noop
 
 https://user-images.githubusercontent.com/3149083/135654217-244d7457-9db9-4c30-a98a-785b25453fd8.mp4
 
