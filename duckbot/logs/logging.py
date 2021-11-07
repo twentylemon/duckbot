@@ -32,7 +32,7 @@ class Logging(commands.Cog):
         )
 
     @commands.command(name="logs")
-    async def logs_command(self, context: commands.Context):
+    async def logs_command(self, context: commands.Context):  # pragma: no cover
         await self.logs(context)
 
     async def logs(self, context: commands.Context):
