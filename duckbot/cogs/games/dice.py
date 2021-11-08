@@ -9,7 +9,7 @@ class Dice(commands.Cog):
         self.bot = bot
 
     @commands.command(name="roll", aliases=["r"])
-    async def roll_command(self, context, *, expression: str = "1d20"):
+    async def roll_command(self, context, *, expression: str = "1d20"):  # pragma: no cover
         await self.roll(context, expression)
 
     async def roll(self, context, expression: str):

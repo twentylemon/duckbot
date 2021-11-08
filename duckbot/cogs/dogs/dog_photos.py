@@ -9,7 +9,7 @@ class DogPhotos(commands.Cog):
         self.bot = bot
 
     @commands.command(name="dog", aliases=["doge"])
-    async def dog_command(self, context, *, breed: Optional[str] = None):
+    async def dog_command(self, context, *, breed: Optional[str] = None):  # pragma: no cover
         await self.dog(context, breed)
 
     async def dog(self, context, breed: Optional[str]):

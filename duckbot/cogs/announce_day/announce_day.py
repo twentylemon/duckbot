@@ -74,5 +74,5 @@ class AnnounceDay(commands.Cog):
         await self.bot.wait_until_ready()
 
     @commands.command(name="day")
-    async def day_command(self, context):
+    async def day_command(self, context):  # pragma: no cover
         await context.send(self.get_message())

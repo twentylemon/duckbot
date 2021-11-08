@@ -24,14 +24,14 @@ class Duck(commands.Cog):
                 await message.add_reaction(regional_indicator(c))
 
     @commands.command(name="duck")
-    async def duck_command(self, context):
+    async def duck_command(self, context):  # pragma: no cover
         await self.github(context)
 
     async def github(self, context):
         await context.send("https://github.com/duck-dynasty/duckbot")
 
     @commands.command(name="help")
-    async def wiki_command(self, context):
+    async def wiki_command(self, context):  # pragma: no cover
         await self.wiki(context)
 
     async def wiki(self, context):

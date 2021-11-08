@@ -12,7 +12,7 @@ class EightBall(commands.Cog):
         self.bot = bot
 
     @commands.command(name="eightball", aliases=["8ball"])
-    async def eightball_command(self, context, *, question: str = None):
+    async def eightball_command(self, context, *, question: str = None):  # pragma: no cover
         await self.eightball(context, question)
 
     async def eightball(self, context: commands.Context, question: str):

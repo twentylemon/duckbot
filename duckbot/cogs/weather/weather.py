@@ -35,7 +35,7 @@ class Weather(commands.Cog):
         return self._owm
 
     @commands.group(name="weather", invoke_without_command=True)
-    async def weather_command(self, context, city: str = None, country: str = None, index: int = None):
+    async def weather_command(self, context, city: str = None, country: str = None, index: int = None):  # pragma: no cover
         await self.weather(context, city, country, index)
 
     async def weather(self, context, city: str, country: str, index: int):
@@ -47,7 +47,7 @@ class Weather(commands.Cog):
                 raise e
 
     @weather_command.command(name="set", invoke_without_command=True)
-    async def weather_set_command(self, context, city: str = None, country: str = None, index: int = None):
+    async def weather_set_command(self, context, city: str = None, country: str = None, index: int = None):  # pragma: no cover
         await self.set_default_location(context, city, country, index)
 
     async def set_default_location(self, context, city: str, country: str, index: int) -> None:

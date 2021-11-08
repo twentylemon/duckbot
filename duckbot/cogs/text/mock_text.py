@@ -8,7 +8,7 @@ class MockText(commands.Cog):
         self.bot = bot
 
     @commands.command(name="mock")
-    async def mock_text_command(self, context, *, text: str = ""):
+    async def mock_text_command(self, context, *, text: str = ""):  # pragma: no cover
         await self.mock_text(context, text)
 
     async def mock_text(self, context, text: str):

@@ -20,7 +20,7 @@ class WhoCanItBeNow(commands.Cog):
             return self.bot.loop.create_task(self.stop())
 
     @commands.command("start")
-    async def start_command(self, context):
+    async def start_command(self, context):  # pragma: no cover
         await self.start(context)
 
     @start_command.before_invoke
@@ -63,7 +63,7 @@ class WhoCanItBeNow(commands.Cog):
             raise commands.CommandError(str(error))
 
     @commands.command("stop")
-    async def stop_command(self, context):
+    async def stop_command(self, context):  # pragma: no cover
         await self.stop(context)
 
     async def stop(self, context=None):

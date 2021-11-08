@@ -11,7 +11,7 @@ class LetMeGoogleThat(commands.Cog):
         self.bot = bot
 
     @commands.command(name="lmgt")
-    async def let_me_google_that_command(self, context: commands.Context, *, query: str):
+    async def let_me_google_that_command(self, context: commands.Context, *, query: str):  # pragma: no cover
         await self.let_me_google_that(context, query)
 
     async def let_me_google_that(self, context: commands.Context, query: str):

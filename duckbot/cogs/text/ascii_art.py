@@ -9,7 +9,7 @@ class AsciiArt(commands.Cog):
         self.bot = bot
 
     @commands.command(name="ascii")
-    async def ascii_command(self, context, *, text: str = "I need text, brother."):
+    async def ascii_command(self, context, *, text: str = "I need text, brother."):  # pragma: no cover
         await self.ascii(context, text)
 
     async def ascii(self, context, text: str):

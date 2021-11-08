@@ -6,13 +6,13 @@ We make heavy use of [pytest fixtures](https://docs.pytest.org/en/6.2.x/fixture.
 For example, whenever you use the `message` fixture, you'll produce several tests (or something! this readme may be out of date!). One for the message in a guild channel, one for a direct message and one for a group channel. The differences between the three are minor, but some fields may or may not be available. Like `member` is used in a guild channel, but `user` is used for direct messages. Voice clients may or may not be available, stuff like that. You can write your test once, and get three tests out of it pretty cheaply.
 
 ## @commands.command, @tasks.loop
-In order to test a `@command` or `@loop` method, delegate all the work to a new method and have the `@method` method do nothing else. The decorators change the method signature, which makes the method itself too hard to test directly.
+In order to test a `@command` or `@loop` method, delegate all the work to a new method and have the `@method` method do nothing else. The decorators change the method signature, which makes the method itself too hard to test directly. You can additionally add a `# pragma: no cover` to tell code coverage to ignore the entrypoint method.
 
 ```python
 # src
 class Foo(commands.Cog):
     @command(name="foo")
-    async def foo_command(self, context):
+    async def foo_command(self, context):  # pragma: no cover
         await self.bar(context)
     async def foo(self, context):
         print("I FOO")
@@ -30,7 +30,7 @@ Alternatively, you can make the delegate method private if you wish.
 # src
 class Foo(commands.Cog):
     @command(name="foo")
-    async def foo(self, context):
+    async def foo(self, context):  # pragma: no cover
         await self.__foo(context)
     async def __foo(self, context):
         print("I FOO")

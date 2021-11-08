@@ -43,7 +43,7 @@ class Insights(commands.Cog):
         await self.bot.wait_until_ready()
 
     @commands.command(name="insight")
-    async def insight_command(self, context):
+    async def insight_command(self, context):  # pragma: no cover
         await self.insight(context)
 
     async def insight(self, context):

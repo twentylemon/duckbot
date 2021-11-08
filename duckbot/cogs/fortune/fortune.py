@@ -10,7 +10,7 @@ class Fortune(commands.Cog):
         self.bot = bot
 
     @commands.command(name="fortune")
-    async def fortune(self, context):
+    async def fortune(self, context):  # pragma: no cover
         await context.send(self.get_fortune())
 
     def get_fortune(self):

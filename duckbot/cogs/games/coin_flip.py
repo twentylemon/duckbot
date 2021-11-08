@@ -8,7 +8,7 @@ class CoinFlip(commands.Cog):
         self.bot = bot
 
     @commands.command(name="coin", aliases=["flip", "toss"])
-    async def coin_command(self, context):
+    async def coin_command(self, context):  # pragma: no cover
         await self.coin_flip(context)
 
     async def coin_flip(self, context):
