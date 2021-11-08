@@ -28,8 +28,8 @@ async def test_logs_sends_tarball_of_logs(tar, open, file, bot, context):
     open.return_value = tar
     mock_file_id = file.return_value
 
-    clazz = Logging(bot)
-    await clazz.logs(context)
+    clazz = Logging(bot)._inject(bot)
+    await clazz.logs_command(context)
 
     open.assert_called_once_with(LOG_TAR_FILE, "w:gz")
     tar.add.assert_called_once_with(LOG_DIR)
