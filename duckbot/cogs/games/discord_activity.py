@@ -13,7 +13,7 @@ class DiscordActivity(commands.Cog):
         self.change_activity_loop.cancel()
 
     @tasks.loop(minutes=281)
-    async def change_activity_loop(self):
+    async def change_activity_loop(self):  # pragma: no cover
         # docs mention there's a "high chance" of disconnecting when changing the presence shortly after connecting
         # however, the issue was never replicated in testing with @loop, the docs specifically mention on_ready event
         # at any rate, if this fails a bunch, we can consider doing something as simple as sleeping a bit here maybe

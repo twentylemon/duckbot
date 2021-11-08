@@ -14,7 +14,7 @@ class OfficeHours(commands.Cog):
         self.check_if_streaming_loop.cancel()
 
     @tasks.loop(minutes=15.0)
-    async def check_if_streaming_loop(self):
+    async def check_if_streaming_loop(self):  # pragma: no cover
         await self.check_if_streaming()
 
     async def check_if_streaming(self):

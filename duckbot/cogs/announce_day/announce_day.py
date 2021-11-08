@@ -42,7 +42,7 @@ class AnnounceDay(commands.Cog):
             return message
 
     @tasks.loop(hours=1.0)
-    async def on_hour_loop(self):
+    async def on_hour_loop(self):  # pragma: no cover
         await self.on_hour()
 
     async def on_hour(self):

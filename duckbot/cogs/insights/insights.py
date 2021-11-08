@@ -17,7 +17,7 @@ class Insights(commands.Cog):
         self.check_should_respond_loop.cancel()
 
     @tasks.loop(minutes=139.0)
-    async def check_should_respond_loop(self):
+    async def check_should_respond_loop(self):  # pragma: no cover
         await self.check_should_respond()
 
     async def check_should_respond(self):
