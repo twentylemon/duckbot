@@ -7,6 +7,7 @@ Command Overview
 | [`!recipe`](#recipe-search) | search for a random recipe |
 | [`!start`, `!stop`](#music) | start or stop playing music |
 | [`!weather`](#weather) | retrieve weather information |
+| [`!calc`](#wolfram-alpha) | search for something on wolfram alpha |
 | `!lmgt` | generates a google search link for the given query |
 | `!8ball` | get a magic eight ball style fortune |
 | `!fortune` | get a random fortune told to you by a cow |
@@ -69,6 +70,10 @@ Here's an example usage:
 > Human: !weather set london ca 2  
 > DuckBot: Location saved! London, CA, geolocation = (42.983391, -81.23304)
 
+Wolfram Alpha
+-------------
+DuckBot gives out a few results to arbitrary queries to [wolfram alpha](https://www.wolframalpha.com/). The results from wolfram are pretty complex, DuckBot spews out a few results in a fairly dumb manner, and gives you a link for your query on wolfram if you want to dig further.
+
 Dice
 ----
 DuckBot will roll Dungeons and Dragons style dice for you. See [dice syntax](https://d20.readthedocs.io/en/latest/start.html#dice-syntax) for the full list of what is possible.
@@ -79,4 +84,14 @@ DuckBot will roll Dungeons and Dragons style dice for you. See [dice syntax](htt
 
 Yolo Pull Requests
 ------------------
-DuckBot will list the open pull requests when the bot owner or one of the repository owners uses the `!yolo` command. DuckBot will eventually learn how to merge his own pull requests, or something.
+DuckBot will list the open pull requests when the bot owner or one of the repository owners uses the `!yolo` command.  
+You can also automatically merge open pull requests by specifying the pull request number. DuckBot will do some basic checks like ensure the pull request checks have passed, and also ask you for confirmation.
+
+> Human: !yolo 69  
+> DuckBot: Bruh, that'll merge this god-awful pull request... are you sure you trust it? I sure as hell don't. (+pull request)
+
+The same person needs to send the same command within a minute of the first will initiate the merge.
+> Human: !yolo 69  
+> DuckBot: Welp. See you on the other side, brother.
+
+DuckBot will approve the pull request and merge it then.

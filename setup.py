@@ -41,6 +41,7 @@ if __name__ == "__main__":
         install_requires=[
             "discord.py[voice] @ git+https://github.com/Rapptz/discord.py",
             "beautifulsoup4",
+            "requests>=2.26,<3",
             "pytz",
             "timezonefinder>=5.2,<6",
             "holidays>=0.11,<0.12",
@@ -60,17 +61,19 @@ if __name__ == "__main__":
                 "pytest",
                 "pytest-asyncio",
                 "pytest-xdist[psutil]",
-                "flake8<4",
+                "flake8<5",
                 "black",
                 "flake8-black",
                 "isort",
                 "flake8-isort",
                 "pep8-naming",
                 "pytest-flake8",
+                "responses>=0.14,<1",
                 "pytest-blockage",
                 "pytest-sugar",
                 "pytest-icdiff",
                 "pytest-cov",
+                "pytest-lazy-fixture",
             ]
         },
     )
