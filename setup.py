@@ -55,6 +55,8 @@ if __name__ == "__main__":
             "matplotlib>=3.4,<4",
             "PyGithub>=1.55,<2",
             "wolframalpha>=5,<6",
+            "selenium",
+            "webdriver_manager",
         ],
         extras_require={
             "dev": [
