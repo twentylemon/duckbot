@@ -1,54 +1,65 @@
 # duckbot
-[![GitHub License](https://img.shields.io/github/license/chippers255/duckbot)](https://github.com/Chippers255/duckbot/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/chippers255/duckbot)](https://github.com/Chippers255/duckbot/issues)
-[![Build Status](https://img.shields.io/github/workflow/status/Chippers255/duckbot/DuckBot%20CI)](https://github.com/Chippers255/duckbot/actions/workflows/python-package.yml)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Chippers255_duckbot&metric=code_smells)](https://sonarcloud.io/dashboard?id=Chippers255_duckbot)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Chippers255_duckbot&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Chippers255_duckbot)
+[![GitHub License](https://img.shields.io/github/license/duck-dynasty/duckbot)](https://github.com/duck-dynasty/duckbot/blob/main/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/duck-dynasty/duckbot)](https://github.com/duck-dynasty/duckbot/issues)
+[![Build Status](https://img.shields.io/github/workflow/status/duck-dynasty/duckbot/DuckBot%20CI)](https://github.com/duck-dynasty/duckbot/actions/workflows/python-package.yml)
+[![codecov](https://codecov.io/gh/duck-dynasty/duckbot/branch/main/graph/badge.svg?token=FX4DT5MWBW)](https://codecov.io/gh/duck-dynasty/duckbot)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/duck-dynasty/duckbot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/duck-dynasty/duckbot/context:python)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 A Discord bot for personal friend group. If you don't know me personally, consider how freaking weird it'd be to ask for the access token. Feel free to steal the code though.
 
-View the [wiki](https://github.com/Chippers255/duckbot/wiki) for a short description on what the Duck does.
+View the [wiki](https://github.com/duck-dynasty/duckbot/wiki) for a short description on what the Duck does.
+
+
+https://user-images.githubusercontent.com/3149083/135654217-244d7457-9db9-4c30-a98a-785b25453fd8.mp4
+
 
 ## Development
-Before running DuckBot or any other scripts, you need to create a virtualenv to develop in. The `venv.sh` script will setup and activate the duckbot virtual environment. Run it before you run any other scripts to ensure you're using the right environment.
-
-The `venv.sh` script expects `python3.8` to be on the `$PATH` if it needs to build a new environment.
+Before running DuckBot, you want to create a virtualenv to develop in. DuckBot runs on `python3.8`, so prefer to use that.
 
 ```sh
-. scripts/venv.sh
+python3.8 -m venv --clear --prompt duckbot venv
+. venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install --editable .[dev]
 ```
 
-This creates a `venv` directory for your virtual environment, which you can use in whatever IDE you prefer.
+The `dev` extras will also install development dependencies, like `pytest`. The installation commands should be run whenever you merge from upstream.
 
-### Install Dependencies
-Should be run whenever you pull from `upstream/main`, or after you create the virtual environment for the first time.
+### Run Tests & Formatter
 ```sh
-. scripts/build/install.sh
+pytest              # runs tests, lint and format checks
+isort . && black .  # reformats the entire code base
 ```
 
-### Run Tests/Lint, Formatter
-```sh
-. scripts/build/test.sh
-. scripts/build/format.sh
-```
+The tests also collects code coverage. [View the configuration](https://github.com/duck-dynasty/duckbot/blob/main/pyproject.toml) to see the minimum required coverage. Discord.py decorators make it difficult to cover methods directly, so don't aim for 100% coverage.
 
-The `test` script performs code coverage checks. [View the script](https://github.com/Chippers255/duckbot/blob/main/scripts/build/test.sh) to see the minimum required coverage. Discord.py decorators make it difficult to cover methods directly, so don't aim for 100% coverage.
-
-`test` also performs lint and formatter checks. These can take a while, so for development, you can choose a directory of tests to run by providing an argument to the `test` script.
-```sh
-. scripts/build/test.sh tests/util  #  only run tests from tests/util; calculate code coverage for duckbot/util
-```
 
 ### Run DuckBot
-DuckBot runs using [docker-compose](https://docs.docker.com/compose/), so ensure that is installed along with docker itself.  
-Requires `duckbut/.env` to be present, and the `DISCORD_TOKEN` environment variable to be set therein. The process will be killed after an hour.
-```
-. scripts/duckbot.sh
-```
+Before running DuckBot, you need to have a `duckbot/.env` file with the API tokens. It should look something like this:
 
-The `duckbot/.env` file should look something like this:
 ```
 duck@pond$ cat duckbot/.env
 DISCORD_TOKEN=thesecrettoken
+OPENWEATHER_TOKEN=thesecrettoken
+GITHUB_TOKEN=thesecrettoken
+WOLFRAM_ALPHA_TOKEN=thesecrettoken
 ```
+
+* Discord tokens available from [Discord Developer](https://discord.com/developers/applications)
+* You can get an [openweather api token](https://openweathermap.org/api) for free as well
+* The github token is a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+* The wolfram alpha token is available from their [api page](https://products.wolframalpha.com/api/)
+
+You only _need_ the discord token. DuckBot will still function without the others, but features that use the tokens won't work. With your tokens available, you can jam them into your shell environment, so you can run DuckBot. You may want to put this into your bashrc for convenience.
+```sh
+export $(cat duckbot/.env | xargs)
+```
+
+Finally, there are two ways to run DuckBot. For a production-like environment, you should run using [docker-compose](https://docs.docker.com/compose/).
+```sh
+docker-compose up --build
+```
+
+If your work doesn't need a full setup, you can just run `python -m duckbot` for less wait time. Depending on what apt packages you have installed, some features may not work, see the [Dockerfile](https://github.com/duck-dynasty/duckbot/blob/main/Dockerfile) for what packages you'd need. For testing simple new commands though, this works fine enough.

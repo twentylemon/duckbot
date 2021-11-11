@@ -1,13 +1,14 @@
-from discord.ext import commands
-from .session import Session
 import asyncio
+
+from discord.ext import commands
+
+from .session import Session
 
 
 class Clever(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.conversations = {}
-
 
     @commands.command(name="chat")
     async def chat_command(self, context):
@@ -24,8 +25,10 @@ class Clever(commands.Cog):
             session = Session()
             session.start()
             await context.send("My bindu is rady.")
+
         def session_check(message):
             return message.author.id == context.author.id
+
         self.conversations[context.author.id] = {"session": session}
         try:
             while True:

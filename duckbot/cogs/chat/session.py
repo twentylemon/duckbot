@@ -1,9 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import (
+    ElementNotInteractableException,
+    StaleElementReferenceException,
+)
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import StaleElementReferenceException
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.webdriver.firefox.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
+
 
 class Session:
     def __init__(self):
@@ -11,7 +14,7 @@ class Session:
         opts.add_argument("--headless")
         opts.set_headless(True)
         self.browser = webdriver.Firefox(options=opts, executable_path=GeckoDriverManager().install())
-        self.url = 'https://www.cleverbot.com'
+        self.url = "https://www.cleverbot.com"
         self.form = None
 
     def start(self):
@@ -29,14 +32,14 @@ class Session:
         print("__get_form")
         try:
             print("find_element_by_id")
-            print(self.browser.find_element_by_id('noteb'))
-            print(self.browser.find_element_by_id('noteb').find_element_by_tag_name("form"))
-            self.browser.find_element_by_id('noteb').find_elements_by_tag_name("form").submit()
+            print(self.browser.find_element_by_id("noteb"))
+            print(self.browser.find_element_by_id("noteb").find_element_by_tag_name("form"))
+            self.browser.find_element_by_id("noteb").find_elements_by_tag_name("form").submit()
         except ElementNotInteractableException:
             print("ElementNotInteractableException")
             pass
         print("stimulus")
-        return self.browser.find_element_by_class_name('stimulus')
+        return self.browser.find_element_by_class_name("stimulus")
 
     def __send(self, message):
         print("send_keys")
@@ -45,14 +48,14 @@ class Session:
     async def __get_response(self):
         while True:
             try:
-                line = self.browser.find_element_by_id('line1')
+                line = self.browser.find_element_by_id("line1")
                 await asyncio.sleep(0.5)
-                newLine = self.browser.find_element_by_id('line1')
-                if line.text != newLine and newLine.text != ' ' and newLine.text != '':
-                    line = self.browser.find_element_by_id('line1')
+                newLine = self.browser.find_element_by_id("line1")
+                if line.text != newLine and newLine.text != " " and newLine.text != "":
+                    line = self.browser.find_element_by_id("line1")
                     await asyncio.sleep(0.5)
                     break
             except StaleElementReferenceException:
-                self.url = self.url + '/?0'
+                self.url = self.url + "/?0"
                 continue
         return line.text

@@ -1,18 +1,16 @@
-import sys
 import socket
+import sys
 
 
 def check():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try:
-        sock.settimeout(10)  # seconds
-        sock.connect(("127.0.0.1", 8008))
-        data = sock.recv(1024)
-    except Exception as e:
-        print(f"{e.__class__.__name__}: {e}")
-        data = None
-    finally:
-        sock.close()
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        try:
+            sock.settimeout(10)  # seconds
+            sock.connect(("127.0.0.1", 8008))
+            data = sock.recv(1024)
+        except Exception as e:
+            print(f"{e.__class__.__name__}: {e}")
+            data = None
 
     if data == b"healthy":
         print("healthy")

@@ -1,8 +1,10 @@
-import discord
-from datetime import date
-import holidays
 import math
-from dateutil.relativedelta import relativedelta as rd, SU
+from datetime import date
+
+import discord
+import holidays
+from dateutil.relativedelta import SU
+from dateutil.relativedelta import relativedelta as rd
 
 
 class SpecialDays(holidays.Canada):
@@ -31,11 +33,13 @@ class SpecialDays(holidays.Canada):
         self[date(year, 4, 12)] = "National Grilled Cheese Day"
         self[date(year, 5, 1) + rd(weekday=SU(+2))] = "Mother's Day"
         self[date(year, 5, 7)] = f"Bro Tito Day {tito}"
+        self[date(year, 5, 25)] = "Towel Day! DON'T PANIC :thumbsup:"
         self[date(year, 6, 1) + rd(weekday=SU(+3))] = "Father's Day"
         self[date(year, 6, 21)] = f"Erin's Birthday. She's {year-1991} years old"
         self[date(year, 9, 8)] = f"Dan's Birthday. He {year-1989} old"
         self[date(year, 9, 26)] = f"Tom's Birthday. He's {year-1990} years old. How he made it this far, we'll never know"
-        self[date(year, 10, 5)] = f"Delta's Birthday. He's {year-2015} years old and is a good boy"
+        self[date(year, 10, 7)] = f"Delta's Birthday. He's {year-2015} years old and is a good boy"
+        self[date(year, 10, 11)] = "Leif Erikson Day. Hinga Dinga Durgen! https://tenor.com/view/viking-spongebob-squarepants-durgen-fall-down-hard-gif-7302846 "  # intentional trailing space for gif
         self[date(year, 10, 31)] = "Halloween"
         self[date(year, 11, 10)] = f"Tom and Kelly's fake wedding anniversary. They've been fake together for {year-2014} years"
         self[date(year, 11, 12)] = f"Sabrina's Birthday. She is {year-1996} years old. Good work on surviving"
