@@ -62,6 +62,7 @@ if __name__ == "__main__":
             "matplotlib==3.4.3",
             "PyGithub==1.55",
             "wolframalpha==5.0.0",
+            "thefuzz==0.19.0",
         ],
         extras_require={
             "dev": [
