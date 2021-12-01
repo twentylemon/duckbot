@@ -96,7 +96,7 @@ if __name__ == "__main__":
                 f"aws-cdk.aws-iam=={CDK_VERSION}",
                 f"aws-cdk.aws-logs=={CDK_VERSION}",
                 f"aws-cdk.aws-ssm=={CDK_VERSION}",
-                "boto3==1.20.10",
+                "boto3==1.20.17",
             ],
         },
         entry_points={
