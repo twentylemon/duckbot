@@ -85,6 +85,7 @@ class DuckBotStack(core.Stack):
             min_capacity=0,
             max_capacity=1,
             desired_capacity=1,
+            new_instances_protected_from_scale_in=False,
             machine_image=ec2.MachineImage.generic_linux(ami_map={"us-east-1": "ami-0c90bcaed0062d19b"}),  # custom ECS AMI created manually via https://github.com/aws/amazon-ecs-ami
             instance_type=ec2.InstanceType.of(instance_class=ec2.InstanceClass.T3, instance_size=ec2.InstanceSize.MICRO),
             spot_price="0.0052",  # t3.nano on-demand price
@@ -100,7 +101,16 @@ class DuckBotStack(core.Stack):
         asg.connections.allow_from(ec2.Peer.any_ipv4(), ec2.Port.tcp(443))
 
         cluster = ecs.Cluster(self, "Cluster", cluster_name="duckbot", vpc=vpc)
-        cluster.add_asg_capacity_provider(ecs.AsgCapacityProvider(cluster, "AsgCapacityProvider", auto_scaling_group=asg), can_containers_access_instance_role=True)
+        cluster.add_asg_capacity_provider(
+            ecs.AsgCapacityProvider(
+                cluster,
+                "AsgCapacityProvider",
+                auto_scaling_group=asg,
+                enable_managed_termination_protection=False,
+            ),
+            can_containers_access_instance_role=True,
+            task_drain_time=core.Duration.seconds(0),
+        )
 
         ecs.Ec2Service(
             self,
@@ -111,4 +121,15 @@ class DuckBotStack(core.Stack):
             desired_count=1,
             min_healthy_percent=0,
             max_healthy_percent=100,
+        )
+
+    def vpc(self) -> ec2.Vpc:
+        return ec2.Vpc(
+            self,
+            "Vpc",
+            enable_dns_support=True,
+            enable_dns_hostnames=True,
+            max_azs=3,
+            nat_gateways=0,
+            subnet_configuration=[ec2.SubnetConfiguration(name="Public", subnet_type=ec2.SubnetType.PUBLIC)],
         )
