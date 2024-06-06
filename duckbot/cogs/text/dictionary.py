@@ -10,7 +10,22 @@ class Dictionary(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.headers = {"app_id": os.getenv("OXFORD_DICTIONARY_ID"), "app_key": os.getenv("OXFORD_DICTIONARY_KEY")}
-        self.url = "https://od-api.oxforddictionaries.com/api/v2"
+        self.url = "https://od-api-sandbox.oxforddictionaries.com/api/v2"
+
+    @commands.command(name="define2")
+    async def define2(self, context: commands.Context, *, word: str = "taco"):
+        response = requests.get(
+            url = f"https://api.wordnik.com/v4/word.json/{word}/definitions",
+            params={
+                "limit": "10",
+                "includeRelated": "false",
+                "useCanonical": "true",
+                "api_key": os.getenv("WORDNIK_KEY"),
+            }).json()
+        print(response)
+
+        embed = discord.Embed(title=word)
+
 
     @commands.hybrid_command(name="define", description="Define a brother, word.")
     async def define_command(self, context: commands.Context, *, word: str = "taco"):
