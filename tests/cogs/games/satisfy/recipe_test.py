@@ -1,5 +1,3 @@
-import random
-
 import pytest
 
 from duckbot.cogs.games.satisfy.building import Building
