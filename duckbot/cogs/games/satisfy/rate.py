@@ -31,8 +31,8 @@ class Rate:
 
 
 class Rates:
-    def __init__(self, rates: List[Rate] | dict[Item, float] = []):
-        self.rates = dict(rates if isinstance(rates, dict) else [r.tuple() for r in rates])
+    def __init__(self, rates: dict[Item, float] = dict()):
+        self.rates = dict(rates)
 
     def items(self):
         return self.rates.items()
@@ -58,7 +58,7 @@ class Rates:
             return Rates(x)
 
     def __rshift__(self, output: Rate | Rates) -> tuple[Rates, Rates]:
-        return (self, output if isinstance(output, Rates) else Rates([output]))
+        return (self, output if isinstance(output, Rates) else Rates(dict([output.tuple()])))
 
     def __mul__(self, scale_factor: float) -> Rates:
         return Rates(dict((i, r * scale_factor) for i, r in self.items()))
