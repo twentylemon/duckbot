@@ -78,5 +78,6 @@ def test_rshift_rate_creates_rates_output(rate, another_rate):
 def test_rshift_rates_copies_rates_output(rate, another_rate):
     assert to_rates(rate) >> to_rates(another_rate) == (to_rates(rate), to_rates(another_rate))
 
+
 def to_rates(rate: Rate) -> Rates:
     return Rates(dict([(rate.item, rate.rate)]))

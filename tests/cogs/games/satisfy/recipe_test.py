@@ -4,16 +4,8 @@ import pytest
 
 from duckbot.cogs.games.satisfy.building import Building
 from duckbot.cogs.games.satisfy.item import Item
-from duckbot.cogs.games.satisfy.rate import Rate, Rates
+from duckbot.cogs.games.satisfy.rate import Rates
 from duckbot.cogs.games.satisfy.recipe import Recipe, pack, unpack
-
-
-@pytest.fixture(params=[x for x in Item])
-def rate(request):
-    return Rate(request.param, random.random())
-
-
-another_rate = rate
 
 
 @pytest.mark.parametrize("name", ["", "name", "another example"])
