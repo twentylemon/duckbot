@@ -6,7 +6,7 @@ from .item import Form, Item
 from .rate import Rates
 
 
-@dataclass
+@dataclass(eq=False)
 class Recipe:
     name: str
     building: Building
@@ -15,6 +15,9 @@ class Recipe:
 
     def __hash__(self):
         return hash(self.name)
+
+    def __eq__(self, x):
+        return self.name == x.name
 
 
 @dataclass
