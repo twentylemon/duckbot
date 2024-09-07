@@ -47,10 +47,10 @@ class Rates:
         return bool(self.rates)
 
     def __eq__(self, rhs: object) -> bool:
-        return False if not isinstance(rhs, Rates) else self.rates == rhs.rates
+        return False if not hasattr(rhs, "rates") else self.rates == rhs.rates
 
     def __add__(self, rate: Rate | Rates) -> Rates:
-        if isinstance(rate, Rates):
+        if hasattr(rate, "rates"):
             return Rates(self.rates | rate.rates)
         else:
             x = self.rates.copy()
@@ -58,7 +58,7 @@ class Rates:
             return Rates(x)
 
     def __rshift__(self, output: Rate | Rates) -> tuple[Rates, Rates]:
-        return (self, output if isinstance(output, Rates) else Rates(dict([output.tuple()])))
+        return (self, output if hasattr(output, "rates") else Rates(dict([output.tuple()])))
 
     def __mul__(self, scale_factor: float) -> Rates:
         return Rates(dict((i, r * scale_factor) for i, r in self.items()))
