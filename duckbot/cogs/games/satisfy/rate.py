@@ -49,10 +49,13 @@ class Rates:
     def __eq__(self, rhs: object) -> bool:
         return False if not isinstance(rhs, Rates) else self.rates == rhs.rates
 
-    def __add__(self, rate: Rate) -> Rates:
-        x = self.rates.copy()
-        x[rate.item] = rate.rate
-        return Rates(x)
+    def __add__(self, rate: Rate | Rates) -> Rates:
+        if isinstance(rate, Rates):
+            return Rates(self.rates | rate.rates)
+        else:
+            x = self.rates.copy()
+            x[rate.item] = rate.rate
+            return Rates(x)
 
     def __rshift__(self, output: Rate | Rates) -> tuple[Rates, Rates]:
         return (self, output if isinstance(output, Rates) else Rates([output]))
