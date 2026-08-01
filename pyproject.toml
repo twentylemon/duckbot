@@ -60,7 +60,7 @@ dev = [
 ]
 
 cdk = [
-    "aws-cdk-lib==2.262.1",
+    "aws-cdk-lib==2.262.2",
     "constructs==10.7.1",
     "boto3==1.43.58",
 ]
